@@ -1,0 +1,84 @@
+buildscript {
+  ext.kotlinVersion  = "1.1.4-2"
+  ext.jacksonVersion = "2.9.0"
+  ext.awsSdkVersion  = "1.11.184"
+
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+  }
+}
+
+version = "0.1.0"
+group   = "io.datawire"
+
+void resolveConfiguration(configuration) {
+  if (isResolveableConfiguration(configuration)) {
+    configuration.resolve()
+  }
+}
+
+boolean isResolveableConfiguration(configuration) {
+  def nonResolveableConfigurations = ['apiElements', 'implementation',
+                                      'runtimeElements', 'runtimeOnly',
+                                      'testImplementation', 'testRuntimeOnly',
+                                      'generatedImplementation', 'generatedRuntimeOnly']
+
+  if (nonResolveableConfigurations.contains(configuration.getName())) {
+    return false
+  }
+  return true
+}
+
+subprojects {
+  repositories {
+    jcenter()
+  }
+
+  apply plugin: "java"
+  apply plugin: "kotlin"
+
+  dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    testCompile "junit:junit:4.12"
+  }
+
+  kotlin {
+    experimental {
+      coroutines "enable"
+    }
+  }
+
+  compileKotlin {
+    kotlinOptions {
+      jvmTarget = "1.8"
+    }
+  }
+}
+
+task resolveDependencies {
+  doLast {
+    project.rootProject.allprojects.each { subProject ->
+      subProject.buildscript.configurations.each { configuration ->
+        resolveConfiguration(configuration)
+      }
+      subProject.configurations.each { configuration ->
+        resolveConfiguration(configuration)
+      }
+    }
+  }
+}
+
+[project(":frontend"), project(":backend")].each {
+  it.dependencies {
+    compile "ch.qos.logback:logback-classic:1.1.7"
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "4.1"
+}

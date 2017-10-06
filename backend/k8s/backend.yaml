@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - name: grpc
+      protocol: TCP
+      port: 8010
+
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: web
+          image: {{ build.images["Dockerfile"] }}
+          env:
+            - name: APP_RUNTIME
+              value: kubernetes
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          ports:
+            - name: grpc
+              containerPort: 8010

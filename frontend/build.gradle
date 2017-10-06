@@ -1,0 +1,38 @@
+buildscript {
+  ext.shadowVersion = '1.2.4'
+
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:$shadowVersion"
+  }
+}
+
+apply plugin: "application"
+apply plugin: 'com.github.johnrengelman.shadow'
+
+mainClassName = "frontend.ServerKt"
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile project(":protocol")
+
+  compile "ch.qos.logback:logback-classic:1.1.7"
+
+  compile "com.sparkjava:spark-core:2.6.0"
+  compile "com.spotify:dns:3.1.5"
+}
+
+shadowJar {
+  classifier = "fat"
+  version = null
+
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
+}

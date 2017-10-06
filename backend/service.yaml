@@ -1,0 +1,12 @@
+---
+name: backend
+
+containers:
+  - context: ".."
+    rebuild:
+      root: /src
+      command: ./gradlew test :backend:shadowJar
+      sources:
+        - build.gradle
+        - settings.gradle
+        - backend

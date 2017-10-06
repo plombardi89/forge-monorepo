@@ -1,0 +1,19 @@
+# --- IntelliJ IDEA ---
+.idea
+*.iml
+
+# --- Forge ---
+.forge
+forge.yaml
+
+# --- Gradle ---
+.gradle
+build
+out
+
+# --- Kubernetes ---
+kubernetes/config
+
+# --- Terraform ---
+.terraform
+terraform.tfstate*

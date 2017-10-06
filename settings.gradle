@@ -1,0 +1,5 @@
+rootProject.name = "forge-gradle-monorepo"
+
+include "backend"
+include "protocol"
+include "frontend"
