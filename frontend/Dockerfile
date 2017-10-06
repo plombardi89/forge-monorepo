@@ -6,6 +6,8 @@ LABEL PROJECT_REPO_URL         = "git@github.com:datawire/kubernaut.git" \
       VENDOR                   = "Datawire, Inc." \
       VENDOR_URL               = "https://datawire.io/"
 
+ENV TERM=dumb
+
 WORKDIR /srv
 COPY    . .
 RUN     ./gradlew :frontend:test :frontend:shadowJar

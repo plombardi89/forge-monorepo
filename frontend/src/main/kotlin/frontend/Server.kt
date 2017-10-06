@@ -40,9 +40,9 @@ private fun installFilters() { }
 
 
 private fun installRoutes() {
-  get("/health") { _, _ -> "" }
+  get("/health") { _, _ -> Foobar().foobar() }
 
-  get("/greet/:name") { req, res ->
+  post("/greet/:name") { req, res ->
     val response = greeter.greet(GreetingRequest.newBuilder().setName(req.params("name")).build())
 
     res.type("text/plain")

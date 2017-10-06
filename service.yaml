@@ -5,11 +5,14 @@ containers:
   - dockerfile: backend/Dockerfile
     context: .
     rebuild:
-      root: /src
+      root: /srv
       command: ./gradlew test :backend:shadowJar
 
   - dockerfile: frontend/Dockerfile
     context: .
     rebuild:
-      root: /src
+      root: /srv
       command: ./gradlew test :frontend:shadowJar
+      sources:
+        - frontend/build.gradle
+        - frontend/src
