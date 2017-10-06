@@ -10,4 +10,4 @@ WORKDIR /srv
 COPY    . .
 RUN     ./gradlew :backend:test :backend:shadowJar
 
-ENTRYPOINT ["backend/src/shell/entrypoint.sh"]
+ENTRYPOINT ["backend/src/main/shell/entrypoint.sh"]

@@ -19,7 +19,7 @@
         <appender-ref ref="ASYNC_STDOUT" />
     </root>
 
-    <logger name="io.datawire" level="ALL" />
+    <logger name="frontend" level="ALL" />
     <logger name="spark" level="INFO" />
 
 </configuration>

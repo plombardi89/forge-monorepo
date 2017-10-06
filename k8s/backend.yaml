@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: {{ build.images["Dockerfile"] }}
+          image: {{ build.images["backend/Dockerfile"] }}
           env:
             - name: APP_RUNTIME
               value: kubernetes
