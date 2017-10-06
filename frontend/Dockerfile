@@ -8,6 +8,6 @@ LABEL PROJECT_REPO_URL         = "git@github.com:datawire/kubernaut.git" \
 
 WORKDIR /srv
 COPY    . .
-RUN     ./gradlew :web:test :web:shadowJar
+RUN     ./gradlew :frontend:test :frontend:shadowJar
 
-ENTRYPOINT ["web/src/shell/entrypoint.sh"]
+ENTRYPOINT ["frontend/src/shell/entrypoint.sh"]

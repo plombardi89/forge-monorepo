@@ -26,7 +26,7 @@ spec:
         app: backend
     spec:
       containers:
-        - name: web
+        - name: backend
           image: {{ build.images["Dockerfile"] }}
           env:
             - name: APP_RUNTIME

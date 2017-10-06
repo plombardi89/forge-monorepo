@@ -1,0 +1,15 @@
+---
+name: monorepo
+
+containers:
+  - dockerfile: backend/Dockerfile
+    context: .
+    rebuild:
+      root: /src
+      command: ./gradlew test :backend:shadowJar
+
+  - dockerfile: frontend/Dockerfile
+    context: .
+    rebuild:
+      root: /src
+      command: ./gradlew test :frontend:shadowJar
