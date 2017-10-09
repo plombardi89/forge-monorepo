@@ -7,6 +7,9 @@ containers:
     rebuild:
       root: /srv
       command: ./gradlew test :backend:shadowJar
+      sources:
+        - backend/build.gradle
+        - backend/src
 
   - dockerfile: frontend/Dockerfile
     context: .

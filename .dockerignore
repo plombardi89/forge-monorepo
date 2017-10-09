@@ -1,0 +1,10 @@
+# --- Forge ---
+.forge
+forge.yaml
+
+# --- Gradle ---
+.gradle
+.idea
+*.iml
+build
+gradlew.bat
